@@ -39,6 +39,7 @@ with st.sidebar:
     st.write('You selected : ', option)
 
 
+<<<<<<< HEAD
 st.header("enter your code:")
 
 query = st.text_area(label="votre code SQL ici,", key="user_input")
@@ -46,6 +47,7 @@ query = st.text_area(label="votre code SQL ici,", key="user_input")
 if query:
     result = duckdb.sql(query).df()
     st.dataframe(result)
+
 
 
 
