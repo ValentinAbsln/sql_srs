@@ -39,4 +39,4 @@ jobs:
           pip install isort
           pip install -r requirements.txt
       - run: |
-          pylint --check --verbose .
+          isort --check --verbose .
