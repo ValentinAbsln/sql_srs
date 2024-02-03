@@ -8,9 +8,9 @@ con = duckdb.connect(database="data/exercices_sql_tables.duckdb",read_only=False
 
 data = {
     "theme" : ["cross_joins","window_function"],
-    "exercices" : ["beverage_and_food","simple_window"],
-    "tables" : [["beverages","food_items"],["simple_window"]],
-    "last_reviewed" : ["1970-01-01","1970-01-01"]
+    "exercice_name" : ["beverage_and_food","simple_window"],
+    "tables" : [["beverages","food_items"],"simple_window"],
+    "last_reviewed" : ["1970-01-01","1970-01-01"],
 }
 memory_state_df = pd.DataFrame(data)
 con.execute("CREATE TABLE IF NOT EXISTS memory_state AS SELECT * FROM memory_state_df")
