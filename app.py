@@ -2,14 +2,15 @@
 import duckdb
 import streamlit as st
 import ast
-con = duckdb.connect(database="data/exercices_sql_tables.duckdb",read_only=False)
+
+con = duckdb.connect(database="data/exercices_sql_tables.duckdb", read_only=False)
 
 
 ANSWER_STR = """
 SELECT * FROM beverages 
 CROSS JOIN food_items"""
 
-#solutions_df = duckdb.sql(ANSWER_STR).df()
+# solutions_df = duckdb.sql(ANSWER_STR).df()
 
 with st.sidebar:
     theme = st.selectbox(
