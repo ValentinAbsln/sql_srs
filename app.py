@@ -1,10 +1,10 @@
 # pylint: disable=missing-module-docstring
+import ast
 import logging
+import os
 
 import duckdb
 import streamlit as st
-import ast
-import os
 
 if "data" not in os.listdir():
     print("creating folder data")
@@ -24,15 +24,21 @@ CROSS JOIN food_items"""
 # solutions_df = duckdb.sql(ANSWER_STR).df()
 
 with st.sidebar:
+    theme_list = con.execute("SELECT distinct theme FROM memory_state").df()
     theme = st.selectbox(
         "What would u like to review ?",
-        ["cross_joins", "Group by", "window_function"],
+        theme_list["theme"].unique(),
         index=None,
         placeholder="Select a theme ",
     )
     st.write("You selected : ", theme)
 
-    exercice = con.execute(f"SELECT * FROM memory_state where theme = '{theme}'").df().sort_values("last_reviewed").reset_index()
+    exercice = (
+        con.execute(f"SELECT * FROM memory_state where theme = '{theme}'")
+        .df()
+        .sort_values("last_reviewed")
+        .reset_index()
+    )
 
     st.write(exercice)
     try:
