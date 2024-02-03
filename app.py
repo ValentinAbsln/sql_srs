@@ -21,7 +21,7 @@ with st.sidebar:
     )
     st.write("You selected : ", theme)
 
-    exercice = con.execute(f"SELECT * FROM memory_state where theme = '{theme}'").df()
+    exercice = con.execute(f"SELECT * FROM memory_state where theme = '{theme}'").df().sort_values("last_reviewed").reset_index()
 
     st.write(exercice)
     try:
@@ -48,10 +48,10 @@ if query:
     except KeyError as e:
         st.write("Some columns are missing")
         n_lines_difference = result.shape[0] - solutions_df.shape[0]
-    if n_lines_difference != 0:
-        st.write(
-            f" result has {n_lines_difference} lines difference with the solution"
-        )
+        if n_lines_difference != 0:
+            st.write(
+                f" result has {n_lines_difference} lines difference with the solution"
+            )
 
     # st.dataframe(result.compare(solutions_df))
 
@@ -64,7 +64,7 @@ tab2, tab3 = st.tabs(["Tables", "Solutions"])
 #
 with tab2:
     try:
-        exercice_tables = ast.literal_eval(exercice.loc[0, "tables"])
+        exercice_tables = exercice.loc[0, "tables"]
 
         for table in exercice_tables:
             st.write(f"table: {table}")
